@@ -1,0 +1,10 @@
+task dockerImage(type: Copy) {
+    from 'src/main/docker'
+    into "build/docker"
+}
+
+if ( tasks.findByPath("clean") == null ) {
+    tasks.create(name: "clean", type: Delete) {
+        delete 'build'
+    }
+}
