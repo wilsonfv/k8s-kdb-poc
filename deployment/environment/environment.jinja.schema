@@ -1,0 +1,17 @@
+info:
+  title: Aculus PoC Environment
+  author: Maplequad
+
+imports:
+- path: ../common/namespace.jinja
+- path: k8s-namespace.jinja
+
+properties:
+  infrastructureName:
+    type: string
+    description: Infrastructure namespace
+    default: ""
+  environment:
+    type: string
+    description: Name of the environment within the infrastructure
+    default: ""

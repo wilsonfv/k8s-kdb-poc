@@ -1,0 +1,9 @@
+{% set infrastructureName = properties['infrastructureName'] %}
+{% set environment = properties['environment'] %}
+
+resources:
+  - name: k8s-namespace
+    type: k8s-namespace.jinja
+    properties:
+      infrastructureName: {{ infrastructureName }}
+      environment: {{ environment }}

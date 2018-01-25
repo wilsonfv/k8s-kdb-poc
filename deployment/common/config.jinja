@@ -1,0 +1,16 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: config
+  type: ../common/config.py
+  properties:
+    name: configmap-files
+    k8sConfigMapType: {{ ns.K8S_CONFIGMAPS_TYPE }}
+    k8sNamespace: {{ ns.K8S_NAMESPACE }}
+    topology: {{ topology }}
+    gcpEnv:
+      project-id: {{ env['project'] }}
+      inf-namespace: "{{ ns.INF_NAMESPACE }}"
+      environmentNamespace: "{{ ns.ENV_NAMESPACE }}"
+      pubsubNamespace: "{{ ns.PUB_SUB_NAMESPACE }}"
+      k8sNamespace: "{{ ns.K8S_NAMESPACE }}"

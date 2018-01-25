@@ -1,0 +1,14 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+{% set K8S_NAMESPACES_TYPE = env['project'] + '/' + ns.CLUSTER_TYPE_NAME + ':/api/v1/namespaces' %}
+
+resources:
+{% if ns.K8S_NAMESPACE != 'default' %}
+- name: k8s-namespace
+  type: {{ K8S_NAMESPACES_TYPE }}
+  properties:
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: {{ ns.K8S_NAMESPACE }}
+{% endif %}

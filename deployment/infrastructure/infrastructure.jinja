@@ -1,0 +1,9 @@
+resources:
+- name: arculus-poc-cluster
+  type: cluster.jinja
+  properties:
+     infrastructureName:  {{ properties["infrastructureName"] }}
+#- name: arculus-poc-data-storage
+#  type: data-storage.jinja
+#  properties:
+#     infrastructureName: {{ properties["infrastructureName"] }}
