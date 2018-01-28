@@ -3,7 +3,7 @@ steps:
   id: 'gradle'
   args: ['build','dockerImage']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdv-test/kdb-app', 'kdb-app/build/docker']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/kdb-app', 'kdb-app/build/docker']
   waitFor: ['gradle']
 images:
-- gcr.io/$PROJECT_ID/kdv-test/kdb-app
+- gcr.io/$PROJECT_ID/kdb-test/kdb-app

@@ -25,7 +25,7 @@ resources:
             cloud.google.com/gke-nodepool: default-pool
           containers:
           - name: front-office
-            image: gcr.io/arculus-poc-uat-frontoffice/arculus-poc/front-office
+            image: gcr.io/{{ env['project'] }}/kdb-test/kdb-app
             ports:
             - name: http
               containerPort: 8081
