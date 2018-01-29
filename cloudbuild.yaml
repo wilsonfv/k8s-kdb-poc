@@ -9,7 +9,7 @@ steps:
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/qlsi-tp', 'qlsi-tp/build/docker']
   waitFor: ['gradle']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/qlsi-hdb', 'qlsi-hdb/sim/build/docker']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/qlsi-hdb', 'qlsi-hdb/build/docker']
   waitFor: ['gradle']
 images:
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-sim
