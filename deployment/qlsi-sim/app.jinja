@@ -1,0 +1,54 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: qlsi-sim-deployment
+  type: {{ ns.K8S_DEPLOYMENTS_TYPE }}
+  properties:
+    apiVersion: extensions/v1beta1
+    kind: Deployment
+    namespace: {{ ns.K8S_NAMESPACE }}
+    metadata:
+      name:  qlsi-sim
+      labels:
+        app: qlsi-sim
+    spec:
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            name: qlsi-sim
+          annotations:
+            prometheus.io/scrape: "true"
+        mycustom: annotation
+        spec:
+          nodeSelector:
+            cloud.google.com/gke-nodepool: default-pool
+          containers:
+          - name: qlsi-sim
+            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-sim
+            ports:
+            - name: http
+              containerPort: 8081
+            volumeMounts:
+            - name: config-volume
+              mountPath: /config
+          volumes:
+          - name: config-volume
+            configMap:
+              name: configmap-files
+- name: qlsi-sim-service
+  type: {{ ns.K8S_SERVICES_TYPE }}
+  properties:
+    apiVersion: v1
+    kind: Service
+    namespace: {{ ns.K8S_NAMESPACE }}
+    metadata:
+      name: qlsi-sim
+    spec:
+      type: LoadBalancer
+      ports:
+      - port: 8081
+        targetPort: http
+        protocol: TCP
+      selector:
+        name: qlsi-sim

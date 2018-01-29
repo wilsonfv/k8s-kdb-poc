@@ -1,22 +1,22 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
 resources:
-- name: front-office-deployment
+- name: qlsi-hdb-deployment
   type: {{ ns.K8S_DEPLOYMENTS_TYPE }}
   properties:
     apiVersion: extensions/v1beta1
     kind: Deployment
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name:  front-office
+      name:  qlsi-hdb
       labels:
-        app: front-office
+        app: qlsi-hdb
     spec:
       replicas: 1
       template:
         metadata:
           labels:
-            name: front-office
+            name: qlsi-hdb
           annotations:
             prometheus.io/scrape: "true"
         mycustom: annotation
@@ -24,8 +24,8 @@ resources:
           nodeSelector:
             cloud.google.com/gke-nodepool: default-pool
           containers:
-          - name: front-office
-            image: gcr.io/{{ env['project'] }}/kdb-test/kdb-app
+          - name: qlsi-hdb
+            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-hdb
             ports:
             - name: http
               containerPort: 8081
@@ -36,14 +36,14 @@ resources:
           - name: config-volume
             configMap:
               name: configmap-files
-- name: front-office-service
+- name: qlsi-hdb-service
   type: {{ ns.K8S_SERVICES_TYPE }}
   properties:
     apiVersion: v1
     kind: Service
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name: front-office
+      name: qlsi-hdb
     spec:
       type: LoadBalancer
       ports:
@@ -51,4 +51,4 @@ resources:
         targetPort: http
         protocol: TCP
       selector:
-        name: front-office
+        name: qlsi-hdb

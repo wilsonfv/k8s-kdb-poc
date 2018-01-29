@@ -1,5 +1,5 @@
-imports:
-- path: hdb.jinja
+x`imports:
+- path: app.jinja
 - path: ../common/namespace.jinja
 - path: ../common/config.jinja
 - path: ../common/config.py

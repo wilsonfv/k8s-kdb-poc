@@ -1,0 +1,15 @@
+x`imports:
+- path: app.jinja
+- path: ../common/namespace.jinja
+- path: ../common/config.jinja
+- path: ../common/config.py
+
+properties:
+  infrastructureName:
+    type: string
+    description: Infrastructure namespacee
+    default: ""
+  environment:
+    type: string
+    description: Name of the environment
+    default: ""
