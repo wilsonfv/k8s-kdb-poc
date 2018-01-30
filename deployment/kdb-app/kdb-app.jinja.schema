@@ -1,5 +1,6 @@
-x`imports:
-- path: app.jinja
+imports:
+- path: qlsi-hdb.jinja
+- path: qlsi-tp.jinja
 - path: ../common/namespace.jinja
 - path: ../common/config.jinja
 - path: ../common/config.py

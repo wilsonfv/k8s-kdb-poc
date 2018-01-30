@@ -1,4 +1,4 @@
-x`imports:
+imports:
 - path: app.jinja
 - path: ../common/namespace.jinja
 - path: ../common/config.jinja

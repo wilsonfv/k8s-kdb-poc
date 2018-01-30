@@ -11,3 +11,8 @@ properties:
     type: string
     description: Infrastructure namespace
     default: ""
+
+  computeResource:
+    type: string
+    description: Compute resource mapping to google machine type. Possible values would be low, medium, high.
+    default: "low"

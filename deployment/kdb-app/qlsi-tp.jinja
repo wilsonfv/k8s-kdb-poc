@@ -1,22 +1,22 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
 resources:
-- name: kdb-app-deployment
+- name: qlsi-tp-deployment
   type: {{ ns.K8S_DEPLOYMENTS_TYPE }}
   properties:
     apiVersion: extensions/v1beta1
     kind: Deployment
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name:  kdb-app
+      name:  qlsi-tp
       labels:
-        app: kdb-app
+        app: qlsi-tp
     spec:
       replicas: 1
       template:
         metadata:
           labels:
-            name: kdb-app
+            name: qlsi-tp
           annotations:
             prometheus.io/scrape: "true"
         mycustom: annotation
@@ -24,11 +24,11 @@ resources:
           nodeSelector:
             cloud.google.com/gke-nodepool: default-pool
           containers:
-          - name: kdb-app
-            image: gcr.io/{{ env['project'] }}/kdb-test/kdb-app
+          - name: qlsi-tp
+            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
             ports:
             - name: http
-              containerPort: 8081
+              containerPort: 8082
             volumeMounts:
             - name: config-volume
               mountPath: /config
@@ -36,19 +36,19 @@ resources:
           - name: config-volume
             configMap:
               name: configmap-files
-- name: kdb-app-service
+- name: qlsi-tp-service
   type: {{ ns.K8S_SERVICES_TYPE }}
   properties:
     apiVersion: v1
     kind: Service
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name: kdb-app
+      name: qlsi-tp
     spec:
       type: LoadBalancer
       ports:
-      - port: 8081
+      - port: 8082
         targetPort: http
         protocol: TCP
       selector:
-        name: kdb-app
+        name: qlsi-tp

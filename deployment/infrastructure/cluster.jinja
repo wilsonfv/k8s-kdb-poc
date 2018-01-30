@@ -2,6 +2,16 @@
 
 {% set K8S_ENDPOINTS = {ns.CLUSTER_TYPE_NAME: 'api/v1', ns.CLUSTER_BETA_TYPE_NAME: 'apis/extensions/v1beta1'} %}
 
+{# google cloud machine type https://cloud.google.com/compute/docs/machine-types #}
+{%  set MACHINE_TYPE = '' %}
+{%  if properties.computeResource == 'low' %}
+{%      set MACHINE_TYPE = 'n1-standard-2' %}
+{%  elif properties.computeResource == 'medium' %}
+{%      set MACHINE_TYPE = 'n1-standard-8' %}
+{%  elif properties.computeResource == 'high' %}
+{%      set MACHINE_TYPE = 'n1-standard-32' %}
+{% endif %}
+
 resources:
 - name: k8s-cluster
   type: container.v1.cluster
@@ -13,7 +23,7 @@ resources:
       - name: default-pool
         initialNodeCount: 1
         config:
-          machineType: n1-standard-2
+          machineType: {{ MACHINE_TYPE }}
           oauthScopes:
           - https://www.googleapis.com/auth/compute
           - https://www.googleapis.com/auth/devstorage.read_write

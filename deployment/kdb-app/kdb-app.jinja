@@ -10,8 +10,14 @@ resources:
     infrastructureName: {{ infrastructureName }}
     environment: {{ environment }}
 
-- name: app
-  type: app.jinja
+- name: qlsi-hdb
+  type: qlsi-hdb.jinja
+  properties:
+    infrastructureName: {{ infrastructureName }}
+    environment: {{ environment }}
+
+- name: qlsi-tp
+  type: qlsi-tp.jinja
   properties:
     infrastructureName: {{ infrastructureName }}
     environment: {{ environment }}

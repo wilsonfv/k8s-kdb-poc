@@ -2,4 +2,5 @@ resources:
 - name: kdb-k8s-cluster
   type: cluster.jinja
   properties:
-     infrastructureName:  {{ properties["infrastructureName"] }}
+     infrastructureName: {{ properties["infrastructureName"] }}
+     computeResource: {{ properties["computeResource"] }}
