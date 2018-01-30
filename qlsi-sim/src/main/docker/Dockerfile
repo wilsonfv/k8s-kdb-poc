@@ -1,4 +1,4 @@
-FROM gcr.io/arculuse-poc-uat-backoffice/kx-tick-centos-3.6t
+FROM gcr.io/arculuse-poc-uat-backoffice/kx-tick-centos-3.6t:latest
 
 COPY sim.q .
 
