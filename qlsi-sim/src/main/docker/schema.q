@@ -1,0 +1,18 @@
+qlsData:([]
+    time:`timestamp$();
+    sym:`$();
+    cne:`$();
+    corvilstream:`$();
+    timestamp:`long$();
+    clOrdID:();
+    orderID:();
+    quoteID:();
+    senderCompID:`$();
+    ccypair:`$();
+    sendingTime:();
+    mdReqID:();
+    ordStatus:`$();
+    execType:`$();
+    msgType:`$();
+    fixMsg:()
+ );

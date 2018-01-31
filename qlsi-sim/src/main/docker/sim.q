@@ -1,12 +1,12 @@
 
-qlsData:([]
-    time:`timestamp$();
-    sym:`$();
-    msg:()
- );
+tpPort:"I"$.Q.opt[.z.x]`tpPort;
+
+\l schema.q
 
 symUniv:`$/:.Q.A;
+maxRows:10;
+strLen:100;
 
-.z.ts:{nr:rand 10;`qlsData insert (nr?.z.p;nr?symUniv;1_({100?.Q.an}\)[nr;""])};
+.z.ts:{nr:rand maxRows;`qlsData insert (nr?.z.p;nr?symUniv;nr?`3;nr?`4;nr?0Nj;nr?0Nj;string nr?`4;string nr?`4;string nr?`4;nr?`4;nr?`4;nr?`3;string nr?`4;string nr?`4;nr?`3;nr?`3;nr?`3;1_({strLen?.Q.an}\)[nr;""])};
 
 \t 1000
