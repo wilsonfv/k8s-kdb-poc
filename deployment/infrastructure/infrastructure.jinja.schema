@@ -4,6 +4,7 @@ info:
 
 imports:
 - path: cluster.jinja
+- path: disk.jinja
 - path: ../common/namespace.jinja
 
 properties:
@@ -11,8 +12,11 @@ properties:
     type: string
     description: Infrastructure namespace
     default: ""
-
   computeResource:
     type: string
     description: Compute resource mapping to google machine type. Possible values would be low, medium, high.
     default: "low"
+  zone:
+    type: string
+    description: google cloud zones # https://cloud.google.com/compute/docs/regions-zones/
+    default: "europe-west1-c"

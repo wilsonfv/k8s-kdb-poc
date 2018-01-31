@@ -16,7 +16,7 @@ resources:
 - name: k8s-cluster
   type: container.v1.cluster
   properties:
-    zone: europe-west1-c
+    zone: {{ properties.zone }}
     cluster:
       name: {{ ns.APP_ID }}{{ ns.INF_NAMESPACE }}
       nodePools:
@@ -36,6 +36,12 @@ resources:
           - https://www.googleapis.com/auth/bigtable.data
           - https://www.googleapis.com/auth/pubsub
           - https://www.googleapis.com/auth/servicecontrol
+- name: disk
+  type: disk.jinja
+  properties:
+    infrastructureName: {{ properties.infrastructureName }}
+    environment: {{ properties.environment }}
+    zone: {{ properties.zone }}
 {% for type, endpoint in K8S_ENDPOINTS.iteritems() %}
 - name: {{ type }}
   type: deploymentmanager.v2beta.typeProvider

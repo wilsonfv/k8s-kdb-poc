@@ -32,10 +32,18 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
+            volumeMounts:
+            - name: data-files
+              mountPath: /hdb
           volumes:
           - name: config-volume
             configMap:
               name: configmap-files
+          - name: data-files
+            gcePersistentDisk:
+              pdName: hdb-disk{{ ns.DISK_NAMESPACE }}
+              fsType: ext4
+              readOnly: True
 - name: qlsi-hdb-service
   type: {{ ns.K8S_SERVICES_TYPE }}
   properties:

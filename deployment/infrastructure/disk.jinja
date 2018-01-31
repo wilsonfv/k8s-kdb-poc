@@ -1,0 +1,9 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: hdb-disk{{ ns.DISK_NAMESPACE }}
+  type: compute.v1.disk
+  properties:
+    zone: {{ properties.zone }}
+    type: projects/{{ env['project'] }}/zones/{{ properties.zone }}/diskTypes/pd-standard
+    sizeGb: 200

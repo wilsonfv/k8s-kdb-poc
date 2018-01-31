@@ -3,6 +3,7 @@
 {% set INF_NAMESPACE = ('-' + properties.infrastructureName|string) if properties.infrastructureName else '' %}
 {% set INF__NAMESPACE = INF_NAMESPACE|replace("-","_") %}
 {% set ENV_NAMESPACE = ('_' + properties.environment|string|replace("-","_")) if properties.environment else '' %}
+{% set DISK_NAMESPACE = INF_NAMESPACE %}
 
 {% set PUB_SUB_NAMESPACE = INF_NAMESPACE + ENV_NAMESPACE %}
 {% set K8S_NAMESPACE = ((properties.environment|string) if properties.environment else 'default') %}
