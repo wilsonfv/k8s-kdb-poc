@@ -1,4 +1,4 @@
 gcloud deployment-manager deployments create infra --automatic-rollback-on-error --template=infrastructure.jinja --properties=infrastructureName:test
-gcloud deployment-manager deployments create env --automatic-rollback-on-error --template=environment.jinja --properties=infrastructureName:test,environment:test
-gcloud deployment-manager deployments create kdb-app --automatic-rollback-on-error --template=kdb-app.jinja --properties=infrastructureName:test,environment:test
-gcloud deployment-manager deployments create qlsi-sim --automatic-rollback-on-error --template=qlsi-sim.jinja --properties=infrastructureName:test,environment:test
+gcloud deployment-manager deployments create env --automatic-rollback-on-error --template=environment.jinja --properties=infrastructureName:test,environment:test1
+gcloud deployment-manager deployments create kdb-app --automatic-rollback-on-error --template=kdb-app.jinja --properties=infrastructureName:test,environment:test1
+gcloud deployment-manager deployments create qlsi-sim --automatic-rollback-on-error --template=qlsi-sim.jinja --properties=infrastructureName:test,environment:test1
