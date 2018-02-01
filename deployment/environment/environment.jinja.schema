@@ -4,6 +4,7 @@ info:
 
 imports:
 - path: ../common/namespace.jinja
+- path: disk.jinja
 - path: k8s-namespace.jinja
 
 properties:
@@ -15,3 +16,7 @@ properties:
     type: string
     description: Name of the environment within the infrastructure
     default: ""
+  zone:
+    type: string
+    description: google cloud zones # https://cloud.google.com/compute/docs/regions-zones/
+    default: "europe-west1-c"

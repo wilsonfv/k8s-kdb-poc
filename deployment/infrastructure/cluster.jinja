@@ -36,12 +36,6 @@ resources:
           - https://www.googleapis.com/auth/bigtable.data
           - https://www.googleapis.com/auth/pubsub
           - https://www.googleapis.com/auth/servicecontrol
-- name: disk
-  type: disk.jinja
-  properties:
-    infrastructureName: {{ properties.infrastructureName }}
-    environment: {{ properties.environment }}
-    zone: {{ properties.zone }}
 {% for type, endpoint in K8S_ENDPOINTS.iteritems() %}
 - name: {{ type }}
   type: deploymentmanager.v2beta.typeProvider

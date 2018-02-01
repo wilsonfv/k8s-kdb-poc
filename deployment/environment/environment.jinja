@@ -7,3 +7,9 @@ resources:
     properties:
       infrastructureName: {{ infrastructureName }}
       environment: {{ environment }}
+  - name: disk
+    type: disk.jinja
+    properties:
+      infrastructureName: {{ properties.infrastructureName }}
+      environment: {{ properties.environment }}
+      zone: {{ properties.zone }}

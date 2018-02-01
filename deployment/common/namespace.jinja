@@ -3,10 +3,10 @@
 {% set INF_NAMESPACE = ('-' + properties.infrastructureName|string) if properties.infrastructureName else '' %}
 {% set INF__NAMESPACE = INF_NAMESPACE|replace("-","_") %}
 {% set ENV_NAMESPACE = ('_' + properties.environment|string|replace("-","_")) if properties.environment else '' %}
-{% set DISK_NAMESPACE = INF_NAMESPACE %}
 
-{% set PUB_SUB_NAMESPACE = INF_NAMESPACE + ENV_NAMESPACE %}
+{% set INF_ENV_NAMESPACE = INF_NAMESPACE + ENV_NAMESPACE %}
 {% set K8S_NAMESPACE = ((properties.environment|string) if properties.environment else 'default') %}
+{% set DISK_NAMESPACE = (INF_ENV_NAMESPACE|string|replace("_","-")) %}
 
 {% set CLUSTER_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type' %}
 {% set CLUSTER_TYPE = env['project'] + '/' + CLUSTER_TYPE_NAME + ':/api/v1/namespaces/{namespace}/' %}

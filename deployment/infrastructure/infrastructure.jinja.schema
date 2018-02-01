@@ -4,7 +4,7 @@ info:
 
 imports:
 - path: cluster.jinja
-- path: disk.jinja
+
 - path: ../common/namespace.jinja
 
 properties:

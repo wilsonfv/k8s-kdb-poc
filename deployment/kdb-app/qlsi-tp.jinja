@@ -32,10 +32,17 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
+            volumeMounts:
+            - name: data-files
+              mountPath: /tp
           volumes:
           - name: config-volume
             configMap:
               name: configmap-files
+          - name: data-files
+            gcePersistentDisk:
+              pdName: tp-disk{{ ns.DISK_NAMESPACE }}
+              fsType: ext4
 - name: qlsi-tp-service
   type: {{ ns.K8S_SERVICES_TYPE }}
   properties:

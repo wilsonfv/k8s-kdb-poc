@@ -43,7 +43,6 @@ resources:
             gcePersistentDisk:
               pdName: hdb-disk{{ ns.DISK_NAMESPACE }}
               fsType: ext4
-              readOnly: True
 - name: qlsi-hdb-service
   type: {{ ns.K8S_SERVICES_TYPE }}
   properties:

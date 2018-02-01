@@ -7,3 +7,9 @@ resources:
     zone: {{ properties.zone }}
     type: projects/{{ env['project'] }}/zones/{{ properties.zone }}/diskTypes/pd-standard
     sizeGb: 200
+- name: tp-disk{{ ns.DISK_NAMESPACE }}
+  type: compute.v1.disk
+  properties:
+    zone: {{ properties.zone }}
+    type: projects/{{ env['project'] }}/zones/{{ properties.zone }}/diskTypes/pd-ssd
+    sizeGb: 200
