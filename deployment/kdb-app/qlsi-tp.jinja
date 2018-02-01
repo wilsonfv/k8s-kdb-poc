@@ -23,6 +23,8 @@ resources:
         spec:
           nodeSelector:
             cloud.google.com/gke-nodepool: default-pool
+          securityContext:
+            fsGroup: 1000
           containers:
           - name: qlsi-tp
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
