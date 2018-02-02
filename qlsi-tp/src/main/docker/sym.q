@@ -1,5 +1,5 @@
 qlsData:([]
-    time:`timestamp$();
+    time:`timespan$();
     sym:`$();
     cne:`$();
     corvilstream:`$();

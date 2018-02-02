@@ -1,8 +1,6 @@
 
 tpPort:"I"$.Q.opt[.z.x]`tpPort;
 
-\l schema.q
-
 symUniv:`$/:.Q.A;
 maxRows:10;
 strLen:100;
