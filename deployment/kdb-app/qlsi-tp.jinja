@@ -37,17 +37,6 @@ resources:
             volumeMounts:
             - name: data-files
               mountPath: /tp
-          - name: qlsi-rdb
-            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-rdb
-            ports:
-            -name: http
-             containerPort 8083
-            volumeMounts:
-            - name: config-volume
-              mountPath: /config
-            volumeMounts:
-            - name: data-filew
-              mountPath: /tp
           volumes:
           - name: config-volume
             configMap:
