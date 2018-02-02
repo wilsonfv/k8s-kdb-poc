@@ -21,6 +21,6 @@ h:connTp[];
         ]
      ];
  };
-.q.pc:{h:0Ni}
+.z.pc:{if[x=h;h:0Ni]}
 
 \t 1000
