@@ -26,6 +26,11 @@ resources:
           containers:
           - name: qlsi-sim
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-sim
+            command: 
+            - q
+            - "sim.q"
+            - -p
+            - "8081"
             ports:
             - name: http
               containerPort: 8081
