@@ -12,14 +12,10 @@ steps:
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/qlsi-hdb', 'qlsi-hdb/build/docker']
   waitFor: ['gradle']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/qlsi-rdb', 'qlsi-rdb/build/docker']
-  waitFor: ['gradle']
-- name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/disk-mount-job', 'disk-mount-job/build/docker']
   waitFor: ['gradle']
 images:
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-sim
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-tp
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-hdb
-- gcr.io/$PROJECT_ID/kdb-test/qlsi-rdb
 - gcr.io/$PROJECT_ID/kdb-test/disk-mount-job

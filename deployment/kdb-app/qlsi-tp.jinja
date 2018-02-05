@@ -28,6 +28,8 @@ resources:
           containers:
           - name: qlsi-tp
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
+            command: ["q"]
+            args: ["tick.q", "sym", "/tp", "-p", "8082"]
             ports:
             - name: http
               containerPort: 8082
@@ -38,7 +40,9 @@ resources:
             - name: data-files
               mountPath: /tp
           - name: qlsi-rdb
-            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-rdb
+            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
+            command: ["q"]
+            args: ["tick/r.q", ":8082", "-p", "8083"]
             ports:
             -name: http
              containerPort 8083
@@ -48,6 +52,19 @@ resources:
             volumeMounts:
             - name: data-files
               mountPath: /tp
+          - name: qlsi-tprep
+            image: qcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
+            command: ["q"]
+            args: ["relayTp.q", "-p", "8083"]
+            ports:
+            -name: http
+            containerPort 8083
+            volumeMounts:
+            - name:config-volume
+              mountPath: /config
+            volumeMounts:
+            - name: data-files
+            mountPath: /tp
           volumes:
           - name: config-volume
             configMap:
