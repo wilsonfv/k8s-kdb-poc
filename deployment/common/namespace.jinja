@@ -12,9 +12,12 @@
 {% set CLUSTER_TYPE = env['project'] + '/' + CLUSTER_TYPE_NAME + ':/api/v1/namespaces/{namespace}/' %}
 {% set CLUSTER_BETA_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type-v1beta1-extensions' %}
 {% set CLUSTER_BETA_TYPE = env['project'] + '/' + CLUSTER_BETA_TYPE_NAME + ':/apis/extensions/v1beta1/namespaces/{namespace}/' %}
+{% set CLUSTER_BATCH_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type-v1-batch' %}
+{% set CLUSTER_BATCH_TYPE = env['project'] + '/' + CLUSTER_BATCH_TYPE_NAME + ':/apis/batch/v1/namespaces/{namespace}/' %}
 
 {% set K8S_DEPLOYMENTS_TYPE = CLUSTER_BETA_TYPE + 'deployments' %}
 {% set K8S_INGRESSES_TYPE = CLUSTER_BETA_TYPE + 'ingresses' %}
 {% set K8S_SERVICES_TYPE = CLUSTER_TYPE + 'services' %}
 {% set K8S_DAEMONSET_TYPE = CLUSTER_BETA_TYPE + 'daemonsets' %}
 {% set K8S_CONFIGMAPS_TYPE = CLUSTER_TYPE + 'configmaps' %}
+{% set K8S_JOBS_TYPE = CLUSTER_BATCH_TYPE + 'jobs' %}

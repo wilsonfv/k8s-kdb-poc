@@ -1,0 +1,34 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: disk-mount-job{{ ns.DISK_NAMESPACE }}
+  type: {{ ns.K8S_JOBS_TYPE }}
+  properties:
+    apiVersion: batch/v1
+    kind: Job
+    namespace: {{ ns.K8S_NAMESPACE }}
+    metadata:
+      name: disk-mount-job{{ ns.DISK_NAMESPACE }}
+      labels:
+        app: disk-mount-job{{ ns.DISK_NAMESPACE }}
+    spec:
+      template:
+        metadata:
+          name: disk-mount-job{{ ns.DISK_NAMESPACE }}
+        spec:
+          nodeSelector:
+            cloud.google.com/gke-nodepool: default-pool
+          containers:
+          - name: disk-mount-job-hdb
+            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-hdb
+            ports:
+            - name: http
+              containerPort: 8081
+            volumeMounts:
+            - name: config-volume
+              mountPath: /config
+          volumes:
+          - name: config-volume
+            configMap:
+              name: configmap-files
+          restartPolicy: Never
