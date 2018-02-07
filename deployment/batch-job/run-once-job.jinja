@@ -1,26 +1,32 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
 resources:
-- name: disk-mount-job{{ ns.DISK_NAMESPACE }}
+- name: run-once-job{{ ns.DISK_NAMESPACE }}
   type: {{ ns.K8S_JOBS_TYPE }}
   properties:
     apiVersion: batch/v1
     kind: Job
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name: disk-mount-job{{ ns.DISK_NAMESPACE }}
+      name: run-once-job{{ ns.DISK_NAMESPACE }}
       labels:
-        app: disk-mount-job{{ ns.DISK_NAMESPACE }}
+        app: run-once-job{{ ns.DISK_NAMESPACE }}
     spec:
       template:
         metadata:
-          name: disk-mount-job{{ ns.DISK_NAMESPACE }}
+          labels:
+            name: run-once-job{{ ns.DISK_NAMESPACE }}
+          annotations:
+            prometheus.io/scrape: "true"
+        mycustom: annotation
         spec:
           nodeSelector:
             cloud.google.com/gke-nodepool: default-pool
           containers:
-          - name: disk-mount-job-hdb
-            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-hdb
+          - name: run-once-job
+            image: gcr.io/google-appengine/base
+            command: ["/bin/bash"]
+            args: ["-c", "date;echo;cat /config/gcp-env.conf"]
             ports:
             - name: http
               containerPort: 8081

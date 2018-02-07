@@ -1,0 +1,43 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: cron-job{{ ns.DISK_NAMESPACE }}
+  type: {{ ns.K8S_CRONJOBS_TYPE }}
+  properties:
+    apiVersion: batch/v1beta1
+    kind: CronJob
+    namespace: {{ ns.K8S_NAMESPACE }}
+    metadata:
+      name: cron-job{{ ns.DISK_NAMESPACE }}
+      labels:
+        app: cron-job{{ ns.DISK_NAMESPACE }}
+    spec:
+      schedule: "*/2 * * * *"
+      jobTemplate:
+        spec:
+          template:
+            metadata:
+              labels:
+                name: cron-job{{ ns.DISK_NAMESPACE }}
+              annotations:
+                prometheus.io/scrape: "true"
+            mycustom: annotation
+            spec:
+              nodeSelector:
+                cloud.google.com/gke-nodepool: default-pool
+              containers:
+              - name: cron-job
+                image: gcr.io/google-appengine/base
+                command: ["/bin/bash"]
+                args: ["-c", "date;echo;cat /config/gcp-env.conf"]
+                ports:
+                - name: http
+                  containerPort: 8081
+                volumeMounts:
+                - name: config-volume
+                  mountPath: /config
+              volumes:
+              - name: config-volume
+                configMap:
+                  name: configmap-files
+              restartPolicy: Never

@@ -10,8 +10,14 @@ resources:
     infrastructureName: {{ infrastructureName }}
     environment: {{ environment }}
 
-- name: disk-mount-job
-  type: disk-mount-job.jinja
+- name: run-once-job
+  type: run-once-job.jinja
+  properties:
+    infrastructureName: {{ properties.infrastructureName }}
+    environment: {{ properties.environment }}
+
+- name: crob-job
+  type: crob-job.jinja
   properties:
     infrastructureName: {{ properties.infrastructureName }}
     environment: {{ properties.environment }}
