@@ -1,0 +1,40 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: writedown{{ ns.DISK_NAMESPACE }}
+  type: {{ ns.K8S_JOBS_TYPE }}
+  properties:
+    apiVersion: batch/v1
+    kind: Job
+    namespace: {{ ns.K8S_NAMESPACE }}
+    metadata:
+      name: writedown{{ ns.DISK_NAMESPACE }}
+      labels:
+        app: writedown{{ ns.DISK_NAMESPACE }}
+    spec:
+      template:
+        metadata:
+          labels:
+            name: writedown{{ ns.DISK_NAMESPACE }}
+          annotations:
+            prometheus.io/scrape: "true"
+        mycustom: annotation
+        spec:
+          nodeSelector:
+            cloud.google.com/gke-nodepool: default-pool
+          containers:
+          - name: writedown
+            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
+            command: ["sleep"]
+            args: ["3600"]
+            ports:
+            - name: http
+              containerPort: 8087
+            volumeMounts:
+            - name: config-volume
+              mountPath: /config
+          volumes:
+          - name: config-volume
+            configMap:
+              name: configmap-files
+          restartPolicy: Never
