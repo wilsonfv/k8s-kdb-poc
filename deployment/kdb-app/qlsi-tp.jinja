@@ -89,3 +89,19 @@ resources:
         protocol: TCP
       selector:
         name: qlsi-tp
+- name: qlsi-tprep-service
+  type: {{ ns.K8S_SERVICES_TYPE }}
+  properties:
+    apiVersion: v1
+    kind: Service
+    namespace: {{ ns.K8S_NAMESPACE }}
+    metadata:
+      name: qlsi-tprep
+    spec:
+      type: LoadBalancer
+      ports:
+      - port: 8084
+        targetPort: http
+        protocol: TCP
+      selector:
+        name: qlsi-tprep

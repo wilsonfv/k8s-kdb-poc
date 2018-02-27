@@ -3,3 +3,4 @@ gcloud deployment-manager deployments create env --automatic-rollback-on-error -
 gcloud deployment-manager deployments create batch-job --automatic-rollback-on-error --template=batch-job.jinja --properties=infrastructureName:test,environment:test1
 gcloud deployment-manager deployments create kdb-app --automatic-rollback-on-error --template=kdb-app.jinja --properties=infrastructureName:test,environment:test1
 gcloud deployment-manager deployments create qlsi-sim --automatic-rollback-on-error --template=qlsi-sim.jinja --properties=infrastructureName:test,environment:test1
+gcloud deployment-manager deployments create writedown --automatic-rollback-on-error --template=writedown.jinja --properties=infrastructureName:test,environment:test1
