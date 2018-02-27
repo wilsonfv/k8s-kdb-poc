@@ -33,8 +33,14 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
+            - name: data-files
+              mountPath: /hdb
           volumes:
           - name: config-volume
             configMap:
               name: configmap-files
+          - name: data-files
+            gcePersistentDisk:
+              pdName: hdb-disk{{ ns.DISK_NAMESPACE }}
+              fsType: ext4
           restartPolicy: Never
