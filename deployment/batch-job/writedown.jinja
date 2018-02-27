@@ -25,8 +25,8 @@ resources:
           containers:
           - name: writedown
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
-            command: ["sleep"]
-            args: ["3600"]
+            command: ["q"]
+            args: ["tick/writedown.q"]
             ports:
             - name: http
               containerPort: 8087
