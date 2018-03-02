@@ -19,7 +19,6 @@ resources:
     zone: {{ properties.zone }}
     cluster:
       name: {{ ns.APP_ID }}{{ ns.INF_NAMESPACE }}
-      initialClusterVersion: "1.8.5-gke.0"
       nodePools:
       - name: default-pool
         initialNodeCount: 1
