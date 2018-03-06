@@ -1,4 +1,4 @@
-FROM gcr.io/arculuse-poc-uat-backoffice/kx-centos-3.6t
+FROM gcr.io/kdbtest1-192403/kx-centos-3.6t
 
 COPY k4.lic .
 
