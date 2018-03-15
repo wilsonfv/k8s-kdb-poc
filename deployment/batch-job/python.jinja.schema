@@ -8,7 +8,8 @@ imports:
 - path: ../common/config.py
 - path: run-once-job.jinja
 - path: crob-job.jinja
-- path: crob-job-writedown.jinja
+- path: writedown.jinja
+- path: python.jinja
 
 properties:
   infrastructureName:

@@ -1,6 +1,10 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
-{% set K8S_ENDPOINTS = {ns.CLUSTER_TYPE_NAME: 'api/v1', ns.CLUSTER_BETA_TYPE_NAME: 'apis/extensions/v1beta1', ns.CLUSTER_BATCH_TYPE_NAME: 'apis/batch/v1', ns.CLUSTER_BATCH_BETA_TYPE_NAME: 'apis/batch/v1beta1' } %}
+{% set K8S_ENDPOINTS = {ns.CLUSTER_TYPE_NAME: 'api/v1',
+                        ns.CLUSTER_BETA_TYPE_NAME: 'apis/extensions/v1beta1',
+                        ns.CLUSTER_BATCH_TYPE_NAME: 'apis/batch/v1',
+                        ns.CLUSTER_BATCH_BETA_TYPE_NAME: 'apis/batch/v1beta1',
+                        ns.RBAC_AUTHORIZATION_BETA_TYPE_NAME: 'apis/rbac.authorization.k8s.io/v1beta1'} %}
 
 {# google cloud machine type https://cloud.google.com/compute/docs/machine-types #}
 {%  set MACHINE_TYPE = '' %}

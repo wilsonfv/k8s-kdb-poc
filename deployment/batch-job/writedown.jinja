@@ -1,21 +1,22 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
 resources:
-- name: writedown{{ ns.DISK_NAMESPACE }}
-  type: {{ ns.K8S_JOBS_TYPE }}
+- name: cron-job-writedown-{{ ns.DISK_NAMESPACE }}
+  type: {{ ns.K8S_DEPLOYMENTS_TYPE }}
   properties:
-    apiVersion: batch/v1
-    kind: Job
+    apiVersion: extensions/v1beta1
+    kind: Deployment
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name: writedown{{ ns.DISK_NAMESPACE }}
+      name:  cron-job-writedown
       labels:
-        app: writedown{{ ns.DISK_NAMESPACE }}
+        app: cron-job-writedown
     spec:
+      replicas: 1
       template:
         metadata:
           labels:
-            name: writedown{{ ns.DISK_NAMESPACE }}
+            name: cron-job-writedown
           annotations:
             prometheus.io/scrape: "true"
         mycustom: annotation
@@ -23,24 +24,11 @@ resources:
           nodeSelector:
             cloud.google.com/gke-nodepool: default-pool
           containers:
-          - name: writedown
-            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
-            command: ["q"]
-            args: ["tick/writedown.q"]
-            ports:
-            - name: http
-              containerPort: 8087
-            volumeMounts:
-            - name: config-volume
-              mountPath: /config
-            - name: data-files
-              mountPath: /hdb
-          volumes:
-          - name: config-volume
-            configMap:
-              name: configmap-files
-          - name: data-files
-            gcePersistentDisk:
-              pdName: hdb-disk{{ ns.DISK_NAMESPACE }}
-              fsType: ext4
-          restartPolicy: Never
+          - name: kube-proxy
+            image: gcr.io/google-containers/kubectl:v1.0.7
+            command: ["./kubectl"]
+            args: ["proxy"]
+          - name: curl-api
+            image: gcr.io/{{ env['project'] }}/kdb-test/curl-box
+            command: ["/bin/bash"]
+            args: ["-c", "while true; do /usr/bin/curl http://localhost:8001/api/v1/namespaces/kube-system/services?labelSelector=kubernetes.io%2Fcluster-service%3Dtrue; sleep 2; done"]

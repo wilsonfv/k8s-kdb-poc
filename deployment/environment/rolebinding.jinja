@@ -1,0 +1,19 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: rolebinding-manage-deployments{{ns.ENV_NAMESPACE}}
+  type: {{ns.K8S_ROLEBINDINGS_TYPE}}
+  properties:
+    kind: RoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1beta1
+    metadata:
+      name: manage-deployments{{ns.ENV_NAMESPACE}}
+      namespace: {{ns.K8S_NAMESPACE}}
+    subjects:
+    - kind: ServiceAccount
+      name: default
+      namespace: {{ns.K8S_NAMESPACE}}
+    roleRef:
+      kind: Role
+      name: manage-deployments{{ns.ENV_NAMESPACE}}
+      apiGroup: rbac.authorization.k8s.io

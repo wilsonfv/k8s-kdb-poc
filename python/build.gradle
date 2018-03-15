@@ -1,0 +1,4 @@
+apply from: '../docker.gradle'
+
+tasks.create(name: "build") {
+}
