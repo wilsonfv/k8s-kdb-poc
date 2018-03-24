@@ -1,38 +1,39 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
 resources:
-- name: cron-job{{ ns.DISK_NAMESPACE }}
+- name: cron-job-stop-qlsi-hdb
   type: {{ ns.K8S_CRONJOBS_TYPE }}
   properties:
     apiVersion: batch/v1beta1
     kind: CronJob
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name: cron-job{{ ns.DISK_NAMESPACE }}
+      name: cron-job-stop-qlsi-hdb
       labels:
-        app: cron-job{{ ns.DISK_NAMESPACE }}
+        app: cron-job-stop-qlsi-hdb
     spec:
-      schedule: "*/2 * * * *"
+      schedule: "00 00 * * *"
+      concurrencyPolicy: Forbid
+      successfulJobsHistoryLimit: 7
       jobTemplate:
         spec:
           template:
             metadata:
               labels:
-                name: cron-job{{ ns.DISK_NAMESPACE }}
+                name: cron-job-stop-qlsi-hdb
               annotations:
                 prometheus.io/scrape: "true"
             mycustom: annotation
             spec:
               nodeSelector:
                 cloud.google.com/gke-nodepool: default-pool
+              securityContext:
+                fsGroup: 1000
               containers:
-              - name: cron-job
-                image: gcr.io/google-appengine/base
-                command: ["/bin/bash"]
-                args: ["-c", "date;echo;cat /config/gcp-env.conf"]
-                ports:
-                - name: http
-                  containerPort: 8081
+              - name: stop-qlsi-hdb
+                image: gcr.io/{{ env['project'] }}/kdb-test/python
+                command: ["python"]
+                args: ["script/scaleDeploymentReplicas.py", "qlsi-hdb", "0"]
                 volumeMounts:
                 - name: config-volume
                   mountPath: /config

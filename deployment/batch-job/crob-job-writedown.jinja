@@ -1,24 +1,26 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
 resources:
-- name: cron-job-writedown{{ ns.DISK_NAMESPACE }}
+- name: cron-job-writedown
   type: {{ ns.K8S_CRONJOBS_TYPE }}
   properties:
     apiVersion: batch/v1beta1
     kind: CronJob
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name: cron-job-writedown{{ ns.DISK_NAMESPACE }}
+      name: cron-job-writedown
       labels:
-        app: cron-job-writedown{{ ns.DISK_NAMESPACE }}
+        app: cron-job-writedown
     spec:
-      schedule: "*/2 * * * *"
+      schedule: "01 00 * * *"
+      concurrencyPolicy: Forbid
+      successfulJobsHistoryLimit: 7
       jobTemplate:
         spec:
           template:
             metadata:
               labels:
-                name: cron-job-writedown{{ ns.DISK_NAMESPACE }}
+                name: cron-job-writedown
               annotations:
                 prometheus.io/scrape: "true"
             mycustom: annotation
@@ -28,13 +30,6 @@ resources:
               securityContext:
                 fsGroup: 1000
               initContainers:
-              - name: stop-qlsi-hdb
-                image: gcr.io/{{ env['project'] }}/kdb-test/python
-                command: ["python"]
-                args: ["script/scaleDeploymentReplicas.py", "qlsi-hdb", "0"]
-                volumeMounts:
-                - name: config-volume
-                  mountPath: /config
               - name: writedown
                 image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
                 command: ["q"]
@@ -45,7 +40,7 @@ resources:
                 volumeMounts:
                 - name: config-volume
                   mountPath: /config
-                - name: data-files
+                - name: writedown-data-files
                   mountPath: /hdb
               - name: start-qlsi-hdb
                 image: gcr.io/{{ env['project'] }}/kdb-test/python
@@ -63,8 +58,8 @@ resources:
               - name: config-volume
                 configMap:
                   name: configmap-files
-              - name: data-files
+              - name: writedown-data-files
                 gcePersistentDisk:
                   pdName: hdb-disk{{ ns.DISK_NAMESPACE }}
                   fsType: ext4
-              restartPolicy: OnFailure
+              restartPolicy: Never
