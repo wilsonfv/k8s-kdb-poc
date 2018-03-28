@@ -6,8 +6,7 @@ imports:
 - path: ../common/namespace.jinja
 - path: ../common/config.jinja
 - path: ../common/config.py
-- path: run-once-job.jinja
-- path: crob-job.jinja
+- path: crob-job-stop-qlsi-hdb.jinja
 - path: crob-job-writedown.jinja
 
 properties:

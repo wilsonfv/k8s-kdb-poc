@@ -10,14 +10,8 @@ resources:
     infrastructureName: {{ infrastructureName }}
     environment: {{ environment }}
 
-- name: run-once-job
-  type: run-once-job.jinja
-  properties:
-    infrastructureName: {{ properties.infrastructureName }}
-    environment: {{ properties.environment }}
-
-- name: crob-job
-  type: crob-job.jinja
+- name: crob-job-stop-qlsi-hdb
+  type: crob-job-stop-qlsi-hdb.jinja
   properties:
     infrastructureName: {{ properties.infrastructureName }}
     environment: {{ properties.environment }}
