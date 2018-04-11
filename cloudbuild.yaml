@@ -12,18 +12,10 @@ steps:
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/qlsi-hdb', 'qlsi-hdb/build/docker']
   waitFor: ['gradle']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/kube-proxy', 'kube-proxy/build/docker']
-  waitFor: ['gradle']
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/curl-box', 'curl-box/build/docker']
-  waitFor: ['gradle']
-- name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/python', 'python/build/docker']
   waitFor: ['gradle']
 images:
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-sim
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-tp
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-hdb
-- gcr.io/$PROJECT_ID/kdb-test/kube-proxy
-- gcr.io/$PROJECT_ID/kdb-test/curl-box
 - gcr.io/$PROJECT_ID/kdb-test/python
