@@ -56,8 +56,8 @@ resources:
               mountPath: /tp
           - name: qlsi-tprep
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
-            command: ["sleep"]
-            args: ["3600"]
+            command: ["q"]
+            args: ["tick/replayTp.q", "-p", "8084"]
             ports:
             - name: http
               containerPort: 8084
