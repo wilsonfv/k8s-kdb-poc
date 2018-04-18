@@ -29,7 +29,7 @@ resources:
           - name: qlsi-hdb
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-hdb
             command: ["q"]
-            args: ["/hdb/qlsDb", "-p", "12345"] 
+            args: ["/hdb/qlsDb", "-p", "8081"]
             ports:
             - name: http
               containerPort: 8081
