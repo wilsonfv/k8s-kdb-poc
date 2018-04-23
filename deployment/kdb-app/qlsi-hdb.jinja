@@ -25,6 +25,8 @@ resources:
             cloud.google.com/gke-nodepool: default-pool
           securityContext:
             fsGroup: 1000
+          hostname: hsbc
+          subdomain: qlsihdb
           containers:
           - name: qlsi-hdb
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-hdb
