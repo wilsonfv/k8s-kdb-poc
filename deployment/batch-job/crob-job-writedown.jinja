@@ -12,7 +12,7 @@ resources:
       labels:
         app: cron-job-writedown
     spec:
-      schedule: "10 03 * * *"
+      schedule: "00 01 * * *"
       concurrencyPolicy: Forbid
       successfulJobsHistoryLimit: 7
       jobTemplate:

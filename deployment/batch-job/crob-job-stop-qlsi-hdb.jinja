@@ -12,7 +12,7 @@ resources:
       labels:
         app: cron-job-stop-qlsi-hdb
     spec:
-      schedule: "08 03 * * *"
+      schedule: "00 00 * * *"
       concurrencyPolicy: Forbid
       successfulJobsHistoryLimit: 7
       jobTemplate:
