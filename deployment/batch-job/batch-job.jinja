@@ -4,12 +4,6 @@
 {% set environment = properties['environment'] %}
 
 resources:
-- name: config
-  type: ../common/config.jinja
-  properties:
-    infrastructureName: {{ infrastructureName }}
-    environment: {{ environment }}
-
 - name: crob-job-stop-qlsi-hdb
   type: crob-job-stop-qlsi-hdb.jinja
   properties:

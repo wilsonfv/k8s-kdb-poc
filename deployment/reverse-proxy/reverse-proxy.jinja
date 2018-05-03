@@ -4,12 +4,6 @@
 {% set environment = properties['environment'] %}
 
 resources:
-- name: config
-  type: ../common/config.jinja
-  properties:
-    infrastructureName: {{ infrastructureName }}
-    environment: {{ environment }}
-
 - name: app
   type: app.jinja
   properties:

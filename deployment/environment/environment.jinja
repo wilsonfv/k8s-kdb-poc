@@ -13,16 +13,21 @@ resources:
       infrastructureName: {{ properties.infrastructureName }}
       environment: {{ properties.environment }}
       zone: {{ properties.zone }}
-  - name: rolebinding
-    type: rolebinding.jinja
+  - name: config
+    type: ../common/config.jinja
     properties:
-      infrastructureName: {{ properties.infrastructureName }}
-      environment: {{ properties.environment }}
-      zone: {{ properties.zone }}
-  - name: role
-    type: role.jinja
-    properties:
-      infrastructureName: {{ properties.infrastructureName }}
-      environment: {{ properties.environment }}
-      zone: {{ properties.zone }}
+      infrastructureName: {{ infrastructureName }}
+      environment: {{ environment }}
+#  - name: rolebinding
+#    type: rolebinding.jinja
+#    properties:
+#      infrastructureName: {{ properties.infrastructureName }}
+#      environment: {{ properties.environment }}
+#      zone: {{ properties.zone }}
+#  - name: role
+#    type: role.jinja
+#    properties:
+#      infrastructureName: {{ properties.infrastructureName }}
+#      environment: {{ properties.environment }}
+#      zone: {{ properties.zone }}
 

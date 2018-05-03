@@ -4,6 +4,8 @@ info:
 
 imports:
 - path: ../common/namespace.jinja
+- path: ../common/config.jinja
+- path: ../common/config.py
 - path: disk.jinja
 - path: k8s-namespace.jinja
 

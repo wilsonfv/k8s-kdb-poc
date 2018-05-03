@@ -4,12 +4,6 @@
 {% set environment = properties['environment'] %}
 
 resources:
-- name: config
-  type: ../common/config.jinja
-  properties:
-    infrastructureName: {{ infrastructureName }}
-    environment: {{ environment }}
-
 - name: qlsi-hdb
   type: qlsi-hdb.jinja
   properties:
@@ -21,4 +15,3 @@ resources:
   properties:
     infrastructureName: {{ infrastructureName }}
     environment: {{ environment }}
-
