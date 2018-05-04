@@ -4,7 +4,7 @@
 maxSize:100000;
 system"l tick/",(src:first .z.x,enlist"sym"),".q";
 dt:"D"$first (1_.z.x),enlist[string[.z.d-1]];
-writeData:{[t]show"Writing ",string[count value t]," rows of data";(` sv (`:/tp/qlsDb;`$string dt;t;`))upsert .Q.en[`:/tp/qlsDb]value t};
+writeData:{[t]show"Writing ",string[count value t]," rows of data";(` sv (`:/hdb/qlsDb;`$string dt;t;`))upsert .Q.en[`:/hdb/qlsDb]value t};
 endFn:{writeData[`qlsData];show"Finished running qlsData";exit 0};
 
 show"Writing data for date ",string dt;
