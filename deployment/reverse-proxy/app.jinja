@@ -28,7 +28,7 @@ resources:
             image: gcr.io/{{ env['project'] }}/kdb-test/reverse-proxy
             command: ['nginx', '-g', 'daemon off;']
             ports:
-            - name: http
+            - name: https
               containerPort: 443
             volumeMounts:
             - name: config-volume
@@ -45,11 +45,13 @@ resources:
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
       name: reverse-proxy
+      annotations:
+          cloud.google.com/load-balancer-type: "Internal"
     spec:
       type: LoadBalancer
       ports:
-      - port: 8081
-        targetPort: http
+      - port: 443
+        targetPort: https
         protocol: TCP
       selector:
         name: reverse-proxy
