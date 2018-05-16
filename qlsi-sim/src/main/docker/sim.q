@@ -1,11 +1,12 @@
 
-tpPort:"I"$.Q.opt[.z.x]`tpPort;
+gcpConfig:.j.k first read0 hsym `$"/config/gcp-env.conf";
+tpPort:"I"$.Q.opt[.z.x]`tpPorti;
 
 symUniv:`$/:.Q.A;
 maxRows:10;
 strLen:100;
 
-connTp:{@[hopen;`$":qlsi-tp.test1.svc.cluster.local:8082";0Ni]};
+connTp:{@[hopen;`$":qlsi-tp.",gcpConfig[`k8sNamespace],".svc.cluster.local:8082";0Ni]};
 
 h:connTp[];
 
