@@ -1,4 +1,5 @@
 
+gcpConfig:.j.k first read0 hsym `$"/config/gcp-env.conf";
 .z.zd:(17;2;6);
 
 maxSize:100000;
@@ -9,7 +10,7 @@ endFn:{writeData[`qlsData];show"Finished running qlsData";exit 0};
 
 show"Writing data for date ",string dt;
 
-replayTp:{[src;dt]h:hopen `$":qlsi-tp.test1.svc.cluster.local:8084";neg[h](`relayTp;src;dt)};
+replayTp:{[src;dt]h:hopen `$":qlsi-tp.",gcpConfig[`k8sNamespace],".svc.cluster.local:8084";neg[h](`relayTp;src;dt)};
 /upd:insert;
 
 upd:{[t;x]
