@@ -1,65 +1,60 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
 resources:
-- name: qlsi-hdb-deployment
+- name: k8s-api-proxy-deployment
   type: {{ ns.K8S_DEPLOYMENTS_TYPE }}
   properties:
     apiVersion: extensions/v1beta1
     kind: Deployment
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name:  qlsi-hdb
+      name:  k8s-api-proxy
       labels:
-        app: qlsi-hdb
+        app: k8s-api-proxy
     spec:
       replicas: 1
       template:
         metadata:
           labels:
-            name: qlsi-hdb
+            name: k8s-api-proxy
           annotations:
             prometheus.io/scrape: "true"
         mycustom: annotation
         spec:
           nodeSelector:
             cloud.google.com/gke-nodepool: default-pool-{{ ns.INF_NAMESPACE }}
-          securityContext:
-            fsGroup: 1000
-          hostname: hsbc
-          subdomain: qlsihdb
           containers:
-          - name: qlsi-hdb
-            image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-hdb
-            command: ["/bin/bash", "-c", "[[ -d /hdb/qlsDb ]] || mkdir -p /hdb/qlsDb && q /hdb/qlsDb -p 8081"]
+          - name: k8s-api-proxy
+            image: gcr.io/{{ env['project'] }}/kdb-test/k8s-api-proxy
+#            command: ["./k8s-api-proxy.sh"]
+            command: ["/bin/sh"]
+            args: ["-c", "while true; do echo hello; sleep 10;done"]
             ports:
-            - name: http
-              containerPort: 8081
+            - name: https
+              containerPort: 8118
             volumeMounts:
             - name: config-volume
               mountPath: /config
-            - name: data-files
-              mountPath: /hdb
           volumes:
           - name: config-volume
             configMap:
               name: configmap-files
-          - name: data-files
-            gcePersistentDisk:
-              pdName: hdb-disk{{ ns.DISK_NAMESPACE }}
-              fsType: ext4
-- name: qlsi-hdb-service
+- name: k8s-api-proxy-service
   type: {{ ns.K8S_SERVICES_TYPE }}
   properties:
     apiVersion: v1
     kind: Service
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
-      name: qlsi-hdb
+      name: k8s-api-proxy
+      annotations:
+          cloud.google.com/load-balancer-type: "Internal"
     spec:
       type: LoadBalancer
+#      loadBalancerIP: 10.132.0.10
       ports:
-      - port: 8081
-        targetPort: http
+      - port: 8118
+        targetPort: https
         protocol: TCP
       selector:
-        name: qlsi-hdb
+        name: k8s-api-proxy

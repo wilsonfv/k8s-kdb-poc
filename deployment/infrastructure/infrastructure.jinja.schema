@@ -4,6 +4,7 @@ info:
 
 imports:
 - path: cluster.jinja
+- path: private-cluster.jinja
 
 - path: ../common/namespace.jinja
 

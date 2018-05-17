@@ -22,7 +22,7 @@ resources:
         mycustom: annotation
         spec:
           nodeSelector:
-            cloud.google.com/gke-nodepool: default-pool
+            cloud.google.com/gke-nodepool: default-pool-{{ ns.INF_NAMESPACE }}
           securityContext:
             fsGroup: 1000
           hostname: hsbc
@@ -38,7 +38,6 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
-            volumeMounts:
             - name: data-files
               mountPath: /tp
           - name: qlsi-rdb
@@ -51,7 +50,6 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
-            volumeMounts:
             - name: data-files
               mountPath: /tp
           - name: qlsi-tprep
@@ -64,7 +62,6 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
-            volumeMounts:
             - name: data-files
               mountPath: /tp
           volumes:

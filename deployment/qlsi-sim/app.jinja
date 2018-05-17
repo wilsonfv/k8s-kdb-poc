@@ -22,7 +22,7 @@ resources:
         mycustom: annotation
         spec:
           nodeSelector:
-            cloud.google.com/gke-nodepool: default-pool
+            cloud.google.com/gke-nodepool: default-pool-{{ ns.INF_NAMESPACE }}
           hostname: hsbc
           subdomain: qlsisim
           containers:

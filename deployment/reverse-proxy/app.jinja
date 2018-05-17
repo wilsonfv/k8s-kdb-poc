@@ -22,7 +22,7 @@ resources:
         mycustom: annotation
         spec:
           nodeSelector:
-            cloud.google.com/gke-nodepool: default-pool
+            cloud.google.com/gke-nodepool: default-pool-{{ ns.INF_NAMESPACE }}
           containers:
           - name: reverse-proxy
             image: gcr.io/{{ env['project'] }}/kdb-test/reverse-proxy
@@ -49,6 +49,7 @@ resources:
           cloud.google.com/load-balancer-type: "Internal"
     spec:
       type: LoadBalancer
+      loadBalancerIP: 10.132.0.10
       ports:
       - port: 443
         targetPort: https

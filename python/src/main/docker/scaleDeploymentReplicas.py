@@ -36,8 +36,6 @@ header = {
     'Content-Type': 'application/json'
 }
 
-deployment = 'qlsi-hdb'
-
 url = "https://kubernetes.default.svc.cluster.local/" \
       "apis/extensions/v1beta1/namespaces/{namespace}/" \
       "deployments/{deployment}".format(namespace=namespace, deployment=deploymentName)

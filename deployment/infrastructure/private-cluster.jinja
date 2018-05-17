@@ -13,12 +13,21 @@
 {% endif %}
 
 resources:
-- name: k8s-cluster
-  type: container.v1.cluster
+- name: k8s-private-cluster
+  type: gcp-types/container-v1beta1:projects.locations.clusters
   properties:
     zone: {{ properties.zone }}
+    parent: projects/{{ env["project"] }}/locations/{{ properties.zone }}
     cluster:
       name: {{ ns.APP_ID }}{{ ns.INF_NAMESPACE }}
+      privateCluster: true
+      masterIpv4CidrBlock: "172.16.0.0/28"
+      masterAuthorizedNetworksConfig:
+        enabled: true
+        cidrBlocks:
+        - cidrBlock: 0.0.0.0/0
+      ipAllocationPolicy:
+        useIpAliases: true
       nodePools:
       - name: default-pool-{{ ns.INF_NAMESPACE }}
         initialNodeCount: 1
@@ -64,5 +73,5 @@ resources:
         location: HEADER
         value: >
           $.concat("Bearer ", $.googleOauth2AccessToken())
-    descriptorUrl: https://$(ref.k8s-cluster.endpoint)/swaggerapi/{{ endpoint }}
+    descriptorUrl: https://$(ref.k8s-private-cluster.endpoint)/swaggerapi/{{ endpoint }}
 {% endfor %}

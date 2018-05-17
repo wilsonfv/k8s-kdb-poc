@@ -1,6 +1,12 @@
 resources:
-- name: kdb-k8s-cluster
-  type: cluster.jinja
+#- name: kdb-k8s-cluster
+#  type: cluster.jinja
+#  properties:
+#     infrastructureName: {{ properties["infrastructureName"] }}
+#     computeResource: {{ properties["computeResource"] }}
+#     zone: {{ properties["zone"] }}
+- name: kdb-k8s-private-cluster
+  type: private-cluster.jinja
   properties:
      infrastructureName: {{ properties["infrastructureName"] }}
      computeResource: {{ properties["computeResource"] }}
