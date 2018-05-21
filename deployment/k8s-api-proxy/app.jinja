@@ -26,9 +26,9 @@ resources:
           containers:
           - name: k8s-api-proxy
             image: gcr.io/{{ env['project'] }}/kdb-test/k8s-api-proxy
-#            command: ["./k8s-api-proxy.sh"]
-            command: ["/bin/sh"]
-            args: ["-c", "while true; do echo hello; sleep 10;done"]
+            command: ["/etc/privoxy/k8s-api-proxy.sh"]
+#            command: ["/bin/sh"]
+#            args: ["-c", "while true; do echo hello; sleep 10;done"]
             ports:
             - name: https
               containerPort: 8118
@@ -51,7 +51,7 @@ resources:
           cloud.google.com/load-balancer-type: "Internal"
     spec:
       type: LoadBalancer
-#      loadBalancerIP: 10.132.0.10
+      loadBalancerIP: 10.132.0.16
       ports:
       - port: 8118
         targetPort: https
