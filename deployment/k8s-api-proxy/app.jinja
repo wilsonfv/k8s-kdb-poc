@@ -51,7 +51,7 @@ resources:
           cloud.google.com/load-balancer-type: "Internal"
     spec:
       type: LoadBalancer
-      loadBalancerIP: 10.132.0.16
+      loadBalancerIP: {{ properties['httpProxy'] }}
       ports:
       - port: 8118
         targetPort: https

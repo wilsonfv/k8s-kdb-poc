@@ -80,6 +80,8 @@ resources:
     namespace: {{ ns.K8S_NAMESPACE }}
     metadata:
       name: qlsi-tp
+      annotations:
+          cloud.google.com/load-balancer-type: "Internal"
     spec:
       type: LoadBalancer
       ports:

@@ -1,11 +1,9 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
-{% set infrastructureName = properties['infrastructureName'] %}
-{% set environment = properties['environment'] %}
-
 resources:
 - name: app
   type: app.jinja
   properties:
-    infrastructureName: {{ infrastructureName }}
-    environment: {{ environment }}
+    infrastructureName: {{ properties['infrastructureName'] }}
+    environment: {{ properties['environment'] }}
+    httpProxy: {{ properties['httpProxy'] }}

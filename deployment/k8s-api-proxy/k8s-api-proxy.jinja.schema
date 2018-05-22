@@ -11,3 +11,7 @@ properties:
     type: string
     description: Name of the environment
     default: ""
+  httpProxy:
+    type: string
+    description: the ip address the k8s api proxy pod will be allocated
+    default: "10.132.0.16"

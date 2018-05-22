@@ -4,4 +4,13 @@ gcloud deployment-manager deployments create kdb-app --automatic-rollback-on-err
 gcloud deployment-manager deployments create qlsi-sim --automatic-rollback-on-error --template=qlsi-sim.jinja --properties=infrastructureName:test,environment:test1
 gcloud deployment-manager deployments create batch-job --automatic-rollback-on-error --template=batch-job.jinja --properties=infrastructureName:test,environment:test1
 gcloud deployment-manager deployments create reverse-proxy --automatic-rollback-on-error --template=reverse-proxy.jinja --properties=infrastructureName:test,environment:test1
-gcloud deployment-manager deployments create k8s-api-proxy --automatic-rollback-on-error --template=k8s-api-proxy.jinja --properties=infrastructureName:test,environment:test1
+
+
+
+
+gcloud deployment-manager deployments create infra-pr --automatic-rollback-on-error --template=infrastructure.jinja --properties=infrastructureName:pr
+gcloud deployment-manager deployments create env-pr --automatic-rollback-on-error --template=environment.jinja --properties=infrastructureName:pr,environment:pr
+gcloud deployment-manager deployments create kdb-app-pr --automatic-rollback-on-error --template=kdb-app.jinja --properties=infrastructureName:pr,environment:pr
+gcloud deployment-manager deployments create qlsi-sim-pr --automatic-rollback-on-error --template=qlsi-sim.jinja --properties=infrastructureName:pr,environment:pr
+gcloud deployment-manager deployments create batch-job-pr --automatic-rollback-on-error --template=batch-job.jinja --properties=infrastructureName:pr,environment:pr
+gcloud deployment-manager deployments create k8s-api-proxy-pr --automatic-rollback-on-error --template=k8s-api-proxy.jinja --properties=infrastructureName:pr,environment:pr,httpProxy:10.132.0.16
