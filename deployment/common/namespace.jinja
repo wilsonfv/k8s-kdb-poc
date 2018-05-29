@@ -16,8 +16,8 @@
 {% set CLUSTER_BATCH_TYPE = env['project'] + '/' + CLUSTER_BATCH_TYPE_NAME + ':/apis/batch/v1/namespaces/{namespace}/' %}
 {% set CLUSTER_BATCH_BETA_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type-v1beta-batch' %}
 {% set CLUSTER_BATCH_BETA_TYPE = env['project'] + '/' + CLUSTER_BATCH_BETA_TYPE_NAME + ':/apis/batch/v1beta1/namespaces/{namespace}/' %}
-#{% set RBAC_AUTHORIZATION_BETA_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type-v1beta-rbac-authorization' %}
-#{% set RBAC_AUTHORIZATION_BETA_TYPE = env['project'] + '/' + RBAC_AUTHORIZATION_BETA_TYPE_NAME + ':/apis/rbac.authorization.k8s.io/v1beta1/namespaces/{namespace}/' %}
+{% set RBAC_AUTHORIZATION_BETA_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type-v1beta-rbac-authorization' %}
+{% set RBAC_AUTHORIZATION_BETA_TYPE = env['project'] + '/' + RBAC_AUTHORIZATION_BETA_TYPE_NAME + ':/apis/rbac.authorization.k8s.io/v1beta1/namespaces/{namespace}/' %}
 
 {% set K8S_DEPLOYMENTS_TYPE = CLUSTER_BETA_TYPE + 'deployments' %}
 {% set K8S_INGRESSES_TYPE = CLUSTER_BETA_TYPE + 'ingresses' %}
@@ -26,5 +26,5 @@
 {% set K8S_CONFIGMAPS_TYPE = CLUSTER_TYPE + 'configmaps' %}
 {% set K8S_JOBS_TYPE = CLUSTER_BATCH_TYPE + 'jobs' %}
 {% set K8S_CRONJOBS_TYPE = CLUSTER_BATCH_BETA_TYPE + 'cronjobs' %}
-#{% set K8S_ROLEBINDINGS_TYPE = RBAC_AUTHORIZATION_BETA_TYPE + 'rolebindings' %}
-#{% set K8S_ROLES_TYPE = RBAC_AUTHORIZATION_BETA_TYPE + 'roles' %}
+{% set K8S_ROLEBINDINGS_TYPE = RBAC_AUTHORIZATION_BETA_TYPE + 'rolebindings' %}
+{% set K8S_ROLES_TYPE = RBAC_AUTHORIZATION_BETA_TYPE + 'roles' %}

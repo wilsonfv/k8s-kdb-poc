@@ -15,9 +15,6 @@ steps:
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/python', 'python/build/docker']
   waitFor: ['gradle']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/reverse-proxy', 'reverse-proxy/build/docker']
-  waitFor: ['gradle']
-- name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/kdb-test/k8s-api-proxy', 'k8s-api-proxy/build/docker']
   waitFor: ['gradle']
 images:
@@ -25,5 +22,4 @@ images:
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-tp
 - gcr.io/$PROJECT_ID/kdb-test/qlsi-hdb
 - gcr.io/$PROJECT_ID/kdb-test/python
-- gcr.io/$PROJECT_ID/kdb-test/reverse-proxy
 - gcr.io/$PROJECT_ID/kdb-test/k8s-api-proxy

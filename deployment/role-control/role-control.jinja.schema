@@ -1,0 +1,15 @@
+imports:
+- path: ../common/namespace.jinja
+- path: rolebinding-cluster-admin.jinja
+- path: role.jinja
+- path: rolebinding.jinja
+
+properties:
+  infrastructureName:
+    type: string
+    description: Infrastructure namespace
+    default: ""
+  environment:
+    type: string
+    description: Name of the environment within the infrastructure
+    default: ""

@@ -1,19 +1,24 @@
 {% import '../common/namespace.jinja' as ns with context %}
 
 resources:
-- name: rolebinding-manage-deployments{{ns.ENV_NAMESPACE}}
+- name: rolebinding-cluster-admin
   type: {{ns.K8S_ROLEBINDINGS_TYPE}}
   properties:
     kind: RoleBinding
     apiVersion: rbac.authorization.k8s.io/v1beta1
+    namespace: {{ns.K8S_NAMESPACE}}
     metadata:
       name: manage-deployments{{ns.ENV_NAMESPACE}}
       namespace: {{ns.K8S_NAMESPACE}}
+#    subjects:
+#    - kind: Group
+#      name: system:serviceaccounts:{{ns.K8S_NAMESPACE}}
+#      apiGroup: rbac.authorization.k8s.io
     subjects:
-    - kind: ServiceAccount
-      name: default
-      namespace: {{ns.K8S_NAMESPACE}}
+    - kind: Group
+      name: system:authenticated
+      apiGroup: rbac.authorization.k8s.io
     roleRef:
-      kind: Role
-      name: manage-deployments{{ns.ENV_NAMESPACE}}
+      kind: ClusterRole
+      name: cluster-admin
       apiGroup: rbac.authorization.k8s.io

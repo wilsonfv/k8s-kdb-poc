@@ -1,0 +1,20 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+  # We need to permission the deployment manager cloud service account to create role/rolebinding first
+  # https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control
+  - name: rolebinding-cluster-admin
+    type: rolebinding-cluster-admin.jinja
+    properties:
+      infrastructureName: {{ properties.infrastructureName }}
+      environment: {{ properties.environment }}
+  - name: role
+    type: role.jinja
+    properties:
+      infrastructureName: {{ properties.infrastructureName }}
+      environment: {{ properties.environment }}
+  - name: rolebinding
+    type: rolebinding.jinja
+    properties:
+      infrastructureName: {{ properties.infrastructureName }}
+      environment: {{ properties.environment }}
