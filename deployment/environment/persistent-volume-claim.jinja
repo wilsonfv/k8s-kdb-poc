@@ -1,0 +1,18 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: persistent-volume-claim-deployments{{ns.ENV_NAMESPACE}}
+  type: {{ns.K8S_PERSISTENT_VOLUME_CLAIM_TYPE}}
+  properties:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    namespace: {{ns.K8S_NAMESPACE}}
+    metadata:
+      namespace: {{ns.K8S_NAMESPACE}}
+      name: pvc{{ns.DISK_NAMESPACE}}
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 200Gi

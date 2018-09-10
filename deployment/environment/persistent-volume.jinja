@@ -1,0 +1,22 @@
+{% import '../common/namespace.jinja' as ns with context %}
+
+resources:
+- name: persistent-volume-deployments{{ns.ENV_NAMESPACE}}
+  type: {{ns.K8S_PERSISTENT_VOLUME_TYPE}}
+  properties:
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: pv{{ns.DISK_NAMESPACE}}
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      capacity:
+        storage: 200Gi
+      persistentVolumeReclaimPolicy: Retain
+      claimRef:
+        namespace: {{ns.K8S_NAMESPACE}}
+        name: pvc{{ns.DISK_NAMESPACE}}
+      gcePersistentDisk:
+        pdName: kdb-encrypted-disk
+        fsType: ext4

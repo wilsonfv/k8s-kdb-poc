@@ -18,4 +18,14 @@ resources:
     properties:
       infrastructureName: {{ infrastructureName }}
       environment: {{ environment }}
+  - name: pv
+    type: persistent-volume.jinja
+    properties:
+      infrastructureName: {{ infrastructureName }}
+      environment: {{ environment }}
+  - name: pvc
+    type: persistent-volume-claim.jinja
+    properties:
+      infrastructureName: {{ infrastructureName }}
+      environment: {{ environment }}
 

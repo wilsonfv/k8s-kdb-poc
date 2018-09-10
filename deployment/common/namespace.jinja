@@ -18,6 +18,10 @@
 {% set CLUSTER_BATCH_BETA_TYPE = env['project'] + '/' + CLUSTER_BATCH_BETA_TYPE_NAME + ':/apis/batch/v1beta1/namespaces/{namespace}/' %}
 {% set RBAC_AUTHORIZATION_BETA_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type-v1beta-rbac-authorization' %}
 {% set RBAC_AUTHORIZATION_BETA_TYPE = env['project'] + '/' + RBAC_AUTHORIZATION_BETA_TYPE_NAME + ':/apis/rbac.authorization.k8s.io/v1beta1/namespaces/{namespace}/' %}
+{% set PERSISTENT_VOLUME_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type-v1-persistenvolumes' %}
+{% set PERSISTENT_VOLUME_TYPE = env['project'] + '/' + CLUSTER_TYPE_NAME + ":/api/v1/persistentvolumes" %}
+{% set PERSISTENT_VOLUME_CLAIM_TYPE_NAME = APP_ID + INF_NAMESPACE + '-type-v1-persistentvolumeclaims' %}
+{% set PERSISTENT_VOLUME_CLAIM_TYPE = env['project'] + '/' + CLUSTER_TYPE_NAME + ":/api/v1/namespaces/{namespace}/persistentvolumeclaims" %}
 
 {% set K8S_DEPLOYMENTS_TYPE = CLUSTER_BETA_TYPE + 'deployments' %}
 {% set K8S_INGRESSES_TYPE = CLUSTER_BETA_TYPE + 'ingresses' %}
@@ -28,3 +32,5 @@
 {% set K8S_CRONJOBS_TYPE = CLUSTER_BATCH_BETA_TYPE + 'cronjobs' %}
 {% set K8S_ROLEBINDINGS_TYPE = RBAC_AUTHORIZATION_BETA_TYPE + 'rolebindings' %}
 {% set K8S_ROLES_TYPE = RBAC_AUTHORIZATION_BETA_TYPE + 'roles' %}
+{% set K8S_PERSISTENT_VOLUME_TYPE = PERSISTENT_VOLUME_TYPE %}
+{% set K8S_PERSISTENT_VOLUME_CLAIM_TYPE = PERSISTENT_VOLUME_CLAIM_TYPE %}

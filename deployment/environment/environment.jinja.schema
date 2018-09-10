@@ -8,6 +8,8 @@ imports:
 - path: ../common/config.py
 - path: disk.jinja
 - path: k8s-namespace.jinja
+- path: persistent-volume.jinja
+- path: persistent-volume-claim.jinja
 
 properties:
   infrastructureName:

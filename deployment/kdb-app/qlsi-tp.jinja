@@ -38,8 +38,9 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
-            - name: data-files
+            - name: data-pvc
               mountPath: /tp
+              readOnly: false
           - name: qlsi-rdb
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
             command: ["q"]
@@ -50,8 +51,9 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
-            - name: data-files
+            - name: data-pvc
               mountPath: /tp
+              readOnly: false
           - name: qlsi-tprep
             image: gcr.io/{{ env['project'] }}/kdb-test/qlsi-tp
             command: ["q"]
@@ -62,8 +64,9 @@ resources:
             volumeMounts:
             - name: config-volume
               mountPath: /config
-            - name: data-files
+            - name: data-pvc
               mountPath: /tp
+              readOnly: false
           volumes:
           - name: config-volume
             configMap:
@@ -72,6 +75,9 @@ resources:
             gcePersistentDisk:
               pdName: tp-disk{{ ns.DISK_NAMESPACE }}
               fsType: ext4
+          - name: data-pvc
+            persistentVolumeClaim:
+              claimName: pvc{{ns.DISK_NAMESPACE}}
 - name: qlsi-tp-service
   type: {{ ns.K8S_SERVICES_TYPE }}
   properties:
