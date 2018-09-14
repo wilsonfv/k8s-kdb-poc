@@ -1,9 +1,13 @@
-FROM alpine
+FROM gcr.io/google-appengine/debian9:latest
 
-RUN apk add -U curl privoxy jq && \
-    mv /etc/privoxy/templates /etc/privoxy-templates && \
-    rm -rf /var/cache/apk/* /etc/privoxy/* && \
-    mv /etc/privoxy-templates /etc/privoxy/templates
+RUN apt-get update && apt-get install -y \
+    curl \
+    privoxy \
+    jq \
+    && rm -rf /var/lib/apt/lists/* \
+    && mv /etc/privoxy/templates /etc/privoxy-templates \
+    && rm -rf /etc/privoxy/* \
+    && mv /etc/privoxy-templates /etc/privoxy/templates
 ADD --chown=privoxy:privoxy config /etc/privoxy/
 ADD --chown=privoxy:privoxy k8s-only.action /etc/privoxy/
 ADD --chown=privoxy:privoxy k8s-rewrite-external.filter /etc/privoxy/
