@@ -8,11 +8,7 @@ RUN apt-get update && apt-get install -y \
     && mv /etc/privoxy/templates /etc/privoxy-templates \
     && rm -rf /etc/privoxy/* \
     && mv /etc/privoxy-templates /etc/privoxy/templates
-ADD --chown=privoxy:privoxy config /etc/privoxy/
-ADD --chown=privoxy:privoxy k8s-only.action /etc/privoxy/
-ADD --chown=privoxy:privoxy k8s-rewrite-external.filter /etc/privoxy/
-ADD k8s-api-proxy.sh /etc/privoxy/
-
+COPY config k8s-api-proxy.sh k8s-only.action k8s-rewrite-external.filter /etc/privoxy/
 RUN chmod +x /etc/privoxy/k8s-api-proxy.sh
 
 EXPOSE 8118/tcp
