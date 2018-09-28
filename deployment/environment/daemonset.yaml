@@ -1,0 +1,33 @@
+kind: DaemonSet
+apiVersion: extensions/v1beta1
+metadata:
+  name: startup-script
+  labels:
+    app: startup-script
+spec:
+  template:
+    metadata:
+      labels:
+        app: startup-script
+    spec:
+      hostPID: true
+      containers:
+        - name: startup-script
+          image: gcr.io/google-containers/startup-script:v1
+          imagePullPolicy: Always
+          securityContext:
+            privileged: true
+          env:
+          - name: STARTUP_SCRIPT
+            value: |
+              #! /bin/bash
+              rm /etc/resolv.conf
+              echo "# test message" > /etc/resolv.conf
+              chmod 644 /etc/resolv.conf
+          volumeMounts:
+          - name: resolv
+            mountPath: /etc/resolv.conf
+      volumes:
+      - name: resolv
+        hostPath:
+          path: /etc/resolv.conf

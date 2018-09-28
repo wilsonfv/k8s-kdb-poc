@@ -1,0 +1,10 @@
+name: projects/kdbtest1-192403/policy
+admissionWhitelistPatterns:
+- namePattern: gcr.io/google_containers/
+- namePattern: gcr.io/google-containers/
+- namePattern: k8s.gcr.io/*
+defaultAdmissionRule:
+  evaluationMode: REQUIRE_ATTESTATION
+  enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
+  requireAttestationsBy:
+  - projects/kdbtest1-192403/attestors/kdb-attestor

@@ -19,3 +19,4 @@ gcloud deployment-manager deployments create k8s-api-proxy-pr --automatic-rollba
 
 
 
+gcloud beta container binauthz policy import binary-authorization-policy/policy.yaml
